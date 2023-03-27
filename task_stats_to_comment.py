@@ -29,23 +29,23 @@ def create_comment_output(task, status):
         return table
 
 
-def create_stats_comment(project_stats):
-    """Create a comment on the current PR containing the ClearML task stats."""
-    payload_fname = os.getenv('GITHUB_EVENT_PATH')
-    with open(payload_fname, 'r') as f:
-        payload = json.load(f)
-    print(payload)
-    owner, repo = payload.get("repository", {}).get("full_name", "").split("/")
-    if owner and repo:
-        gh = login(token=os.getenv("GH_TOKEN"))
-        if gh:
-            pull_request = gh.pull_request(owner, repo, payload.get("number"))
-            if pull_request:
-                pull_request.create_comment(project_stats)
-            else:
-                print(f'Can not comment PR, {payload.get("number")}')
-        else:
-            print(f"Can not log in to gh, {os.getenv('GH_TOKEN')}")
+# def create_stats_comment(project_stats):
+#     """Create a comment on the current PR containing the ClearML task stats."""
+#     payload_fname = os.getenv('GITHUB_EVENT_PATH')
+#     with open(payload_fname, 'r') as f:
+#         payload = json.load(f)
+#     print(payload)
+#     owner, repo = payload.get("repository", {}).get("full_name", "").split("/")
+#     if owner and repo:
+#         gh = login(token=os.getenv("GH_TOKEN"))
+#         if gh:
+#             pull_request = gh.pull_request(owner, repo, payload.get("number"))
+#             if pull_request:
+#                 pull_request.create_comment(project_stats)
+#             else:
+#                 print(f'Can not comment PR, {payload.get("number")}')
+#         else:
+#             print(f"Can not log in to gh, {os.getenv('GH_TOKEN')}")
 
 
 def get_task_stats(task):
@@ -102,4 +102,4 @@ if __name__ == '__main__':
     # Let's also add the task metrics to the PR automatically.
     # Get the metrics from the task and create a comment on the PR.
     stats = get_task_stats(task_obj)
-    create_stats_comment(stats)
+#     create_stats_comment(stats)
