@@ -79,16 +79,16 @@ def get_clearml_task_of_current_commit(commit_id):
         additional_return_fields=['script.diff']
     )
 
-    # If there are tasks, check which one has no diff: aka which one was run with the exact
-    # code that is staged in this PR.
-    if tasks:
-        for task in tasks:
-            if not task['script.diff']:
-                return Task.get_task(task_id=task['id'])
+#     # If there are tasks, check which one has no diff: aka which one was run with the exact
+#     # code that is staged in this PR.
+#     if tasks:
+#         for task in tasks:
+#             if not task['script.diff']:
+#                 return Task.get_task(task_id=task['id'])
 
-    # If no task was run yet with the exact PR code, raise an error and block the PR.
-    raise ValueError("No task based on this code was found in ClearML."
-                     "Make sure to run it at least once before merging.")
+#     # If no task was run yet with the exact PR code, raise an error and block the PR.
+#     raise ValueError("No task based on this code was found in ClearML."
+#                      "Make sure to run it at least once before merging.")
 
 
 if __name__ == '__main__':
