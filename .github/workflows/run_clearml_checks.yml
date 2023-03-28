@@ -23,8 +23,7 @@ jobs:
           python -m pip install --upgrade pip clearml pandas tabulate github3.py Jinja2
       - name: Start the task
         id: launch_task
-        run: |
-          python task_stats_to_comment.py
+        run: python task_stats_to_comment.py
 
   compare-models:
     env:
